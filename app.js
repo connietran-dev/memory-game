@@ -43,14 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
             img: 'gifs/ice-cream.gif'
         },
         {
-            name: 'pineapple',
-            img: 'gifs/pineapple.gif'
-        },
-        {
-            name: 'pineapple',
-            img: 'gifs/pineapple.gif'
-        },
-        {
             name: 'watermelon',
             img: 'gifs/watermelon.gif'
         },
@@ -59,4 +51,22 @@ document.addEventListener('DOMContentLoaded', () => {
             img: 'gifs/watermelon.gif'
         }
     ]
+
+    const grid = document.querySelector('.grid');
+
+    // Create the board
+    function createBoard() {
+        for (let i = 0; i < cardArray.length; i++) {
+            var card = document.createElement('img');
+            card.setAttribute('src', 'images/blank.png');
+            card.setAttribute('data-id', i);
+            card.setAttribute('class', 'card');
+            // card.addEventListener('click', flipCard);
+            grid.appendChild(card);
+        };
+
+    };
+
+    createBoard();
+
 });
