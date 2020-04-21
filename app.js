@@ -53,13 +53,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ]
 
+    // Randomize cardArray
+    cardArray.sort(() => 0.5 - Math.random());
+
+
     // VARIABLES
     const scoreDiv = document.querySelector('#score');
     const resultSpan = document.querySelector('#result');
     const grid = document.querySelector('.grid');
     var cardsChosen = [];
     var cardsChosenId = [];
-    var cardsWon = [];
+    const cardsWon = [];
 
 
     // CALL FUNCTIONS
@@ -130,6 +134,8 @@ document.addEventListener('DOMContentLoaded', () => {
             matchMessage.setAttribute('class', 'matchMessage');
             scoreDiv.appendChild(matchMessage);
 
+            setTimeout(() => scoreDiv.removeChild(matchMessage), 1000);
+
             // And assign white.png to make them "disappear"
             cards[optionOneId].setAttribute('src', 'images/white.png');
             cards[optionTwoId].setAttribute('src', 'images/white.png');
@@ -149,6 +155,8 @@ document.addEventListener('DOMContentLoaded', () => {
             mismatchMessage.innerText = "Sorry! Try again";
             mismatchMessage.setAttribute('class', 'matchMessage');
             scoreDiv.appendChild(mismatchMessage);
+
+            setTimeout(() => scoreDiv.removeChild(mismatchMessage), 1000);
 
             //  And give them blank.png to "reset" them
             cards[optionOneId].setAttribute('src', 'images/blank.png')
@@ -173,11 +181,24 @@ document.addEventListener('DOMContentLoaded', () => {
         resultSpan.textContent = cardsWon.length;
 
         // If cardsWon is the same length as half of the cardsArray, player has chosen all the cards and has won
-        if (cardsWon.length === cardArray / 2) {
+        if (cardsWon.length === cardArray.length / 2) {
             var winMessage = document.createElement('p');
-            winMessage.innerText = "Congratulations! You win";
-            winMessage.setAttribute('class', 'matchMessage');
-            scoreDiv.appendChild(winMessage);
+
+            // Show congrats message after 1 second to give matchMessage chance to display 
+            // Here, I am trying a different style of function for setTimeout
+            setTimeout(function() {
+                winMessage.innerText = "Congratulations. You win!";
+                winMessage.setAttribute('class', 'matchMessage');
+                scoreDiv.appendChild(winMessage);
+
+                var restartForm = document.createElement('form');
+                var restartBtn = document.createElement('button');
+                restartBtn.innerText = "Restart Game";
+                scoreDiv.appendChild(restartForm);
+                restartForm.appendChild(restartBtn);
+
+            }, 1000);
+
         }
     }
 

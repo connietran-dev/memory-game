@@ -11,8 +11,9 @@
 }
 
 header {
-    height: 150px;
+    height: 200px;
     text-align: center;
+    margin-right: 66px;
 }
 
 body {
