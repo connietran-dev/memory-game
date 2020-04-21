@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // Array for card options
+    // Create two of each card
     const cardArray = [
         {
             name: 'cake',
@@ -54,10 +55,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // VARIABLES
     const scoreDiv = document.querySelector('#score');
+    const resultSpan = document.querySelector('#result');
     const grid = document.querySelector('.grid');
-    const cardsChosen = [];
-    const cardsChosenId = [];
-    const cardsWon = [];
+    var cardsChosen = [];
+    var cardsChosenId = [];
+    var cardsWon = [];
 
 
     // CALL FUNCTIONS
@@ -97,8 +99,8 @@ document.addEventListener('DOMContentLoaded', () => {
         cardsChosen.push(cardArray[cardId].name);
         cardsChosenId.push(cardId);
 
-        console.log(cardsChosen);
-        console.log(cardsChosenId);
+        console.log("cardsChosen: ", cardsChosen);
+        console.log("cardsChosenId: ", cardsChosenId);
 
         // Set front of card with image out of cardArray based on clicked data-id
         this.setAttribute('src', cardArray[cardId].img);
@@ -134,8 +136,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // And push 2 chosen cards to cardsWon array to be stored
             cardsWon.push(cardsChosen);
+            console.log("cardsChosen: ", cardsChosen);
+            console.log("cardsWon: ", cardsWon);
+            console.log("cardsWon.length: ", cardsWon.length);
 
-            // If they don't match
+
+        // If they don't match
         } else {
 
             // Show mismatch message
@@ -154,6 +160,25 @@ document.addEventListener('DOMContentLoaded', () => {
         cardsChosen = [];
         cardsChosenId = [];
 
+        // Then display score result
+        displayResult();
+
+    }
+
+
+    // Display score result
+    function displayResult() {
+
+        // Score is 1 point for every pair of cards in cardsWon array
+        resultSpan.textContent = cardsWon.length;
+
+        // If cardsWon is the same length as half of the cardsArray, player has chosen all the cards and has won
+        if (cardsWon.length === cardArray / 2) {
+            var winMessage = document.createElement('p');
+            winMessage.innerText = "Congratulations! You win";
+            winMessage.setAttribute('class', 'matchMessage');
+            scoreDiv.appendChild(winMessage);
+        }
     }
 
 });

@@ -3,6 +3,7 @@
     flex-wrap: wrap;
     height: 300px;
     width: 400px;
+    margin: 0 auto;
 }
 
 .card {
@@ -10,5 +11,18 @@
 }
 
 header {
-    height: 100px;
+    height: 150px;
+    text-align: center;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+}
+
+h1 {
+    margin-bottom: 5px;
+}
+
+h3 {
+    margin-top: 0;
 }
